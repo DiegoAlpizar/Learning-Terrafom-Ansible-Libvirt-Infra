@@ -1,0 +1,23 @@
+---
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html#examples
+- name: Hello World
+  hosts: all
+  become: true
+
+  vars:
+    pals:
+      - probando
+      - holadaf
+      - prob 3533535
+      - LOLOLOLOLOL
+
+    dic:
+      ADIcKey: dic_key
+      secondKey: hokaokak
+
+
+  tasks:
+    - name: Print Hello World
+      ansible.builtin.debug:
+        var: dic.ADicKey

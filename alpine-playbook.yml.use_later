@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Update Alpine repo cache
+      community.general.apk:
+        update_cache: true
+      when: ansible_pkg_mgr == "apk"
+      tags: [ 'update_cache' , 'update_repo' ]
+
+    - name: Install Docker Alpine package
+      community.general.apk:
+        name: docker
+        state: present
+
+        

@@ -1,0 +1,39 @@
+[DebianCloud]
+Debian-Terraform ansible_host=192.168.122.54
+
+[all:vars]
+ansible_strict_host_key_checking=False
+ansible_user_known_hosts_file=/dev/null
+
+[Web]
+Web-01 ansible_host=0.0.0.0 http_port=80
+Web-02 ansible_host=0.0.0.1 http_port=443
+
+[Web:vars]
+ansible_user=topusito
+
+[DB]
+
+
+[FrontEnd]
+
+
+
+[west-01]
+
+
+[east-01]
+
+
+
+[Dev]
+
+
+[Testing]
+
+
+[Staging]
+
+
+[Prod]
+

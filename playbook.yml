@@ -1,0 +1,40 @@
+---
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html#examples
+- hosts: all
+  become: true
+  tasks:
+    - name: Update Debian repo cache
+      ansible.builtin.apt:
+        update_cache: true
+      # when: ansible_os_family == "Debian"
+      # changed_when: false
+      tags: [ 'update_cache' , 'update_repo' ]
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+      tags: ["docker"]
+    
+    - name: Start docker service and ensure is enabled
+      systemd:
+        name: docker
+        state: started
+        enabled: true
+      tags: ["docker"]
+
+    - name: Install NginX
+      apt:
+        name:
+          - nginx
+      tags: [ 'setup' ]
+
+    - name: Copy index page
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+      tags: [ 'update', 'sync' ]
